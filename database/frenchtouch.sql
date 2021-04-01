@@ -85,7 +85,8 @@ FOREIGN KEY (`imageCarousel_id`) REFERENCES `imageCarouselGift`(`id`)
 CREATE TABLE `home` (
 `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 `picture_about` VARCHAR(255) NOT NULL,
-`content_about` TEXT NOT NULL
+`content_about` TEXT NOT NULL,
+`picture_home` VARCHAR(255) NOT NULL 
 );
 
 CREATE TABLE `notice` (

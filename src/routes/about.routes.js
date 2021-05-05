@@ -1,10 +1,8 @@
-const { connection } = require("../db_connection");
-const router = require("express").Router();
-
-
+const {connection} = require('../db_connection');
+const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  const sql = "SELECT * FROM user";
+  const sql = "SELECT * FROM about";
   connection.query(sql, (err, results) => {
     if (err) {
       res.status(500).send({errorMessage: err.message});
@@ -15,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const sql = "INSERT INTO user SET ?";
+  const sql = "INSERT INTO about SET ?";
   connection.query(sql, req.body, (err, results) => {
     if (err) {
       res.status(500).send({errorMessage: err.message});
@@ -26,15 +24,15 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  let sql = "UPDATE user SET ? WHERE id=?";
+  let sql = "UPDATE about SET ? WHERE id=?";
   connection.query(sql, [req.body, req.params.id], (err, results) => {
     if (err) {
       res.status(500).send({errorMessage: err.message});
     } else {
-      sql = "SELECT * FROM user WHERE id=?";
+      sql = "SELECT * FROM about WHERE id=?";
       connection.query(sql, req.params.id, (err, result) => {
         if (result.length === 0) {
-          res.status(404).send({errorMessage: `User with id ${req.params.id} not found`});
+          res.status(404).send({errorMessage: `About with id ${req.params.id} not found`});
         } else {
           res.status(200).json(result[0]);
         }
@@ -44,7 +42,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  const sql = "DELETE FROM user WHERE id=?";
+  const sql = "DELETE FROM about WHERE id=?";
   connection.query(sql, req.params.id, (err, results) => {
     if (err) {
       res.status(500).send({errorMessage: err.message});
